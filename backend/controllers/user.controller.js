@@ -1,5 +1,7 @@
 import User from "../models/user.model.js";
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+dotenv.config()
 
 const userRegister = async (req, res) => {
     try {
@@ -33,7 +35,7 @@ const userLogin = async (req, res) => {
             return res.status(401).json({ msg: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ userId: user._id }, "nikash13579", { expiresIn: "1h" });
+        const token = jwt.sign({ userId: user._id }, process.env.MONGODB_SECRET_KEY, { expiresIn: "1h" });
         res.status(200).json({ token,username,userId:user._id });
     } catch (error) {
         res.status(500).json({ msg: "Login failed", error: error.message });
