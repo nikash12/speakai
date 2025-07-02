@@ -1,14 +1,13 @@
-import { Button } from "@/components/ui/button"
-import { ModeToggle } from "@/components/mode-toggle"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/providers/theme-provider"
+import Navbar from "./components/layout/navbar/Navbar"
+import Recorder from "./components/recorder/Recorder"
+
 
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background text-foreground">
-        <Button>Click Me</Button>
-        <ModeToggle />
-      </div>
+      <Navbar/>
+      <Recorder/>
     </ThemeProvider>
   )
 }
