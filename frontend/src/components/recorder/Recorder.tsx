@@ -2,7 +2,8 @@ import { useAudioRecorder } from "../../hooks/useAudioRecorder.tsx";
 import { Button } from "@/components/ui/button";
 import { audioSchema } from "@/recoil.ts";
 import { Mic, MicOff, Upload } from "lucide-react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import {  useSetRecoilState } from "recoil";
+import WaveformPlayer from "../ui/waveform.tsx";
 
 export default function Recorder() {
   const { startRecording, stopRecording, isRecording, audioBlob } = useAudioRecorder();
@@ -13,12 +14,21 @@ export default function Recorder() {
     const formData = new FormData();
     formData.append("file", audioBlob, "audio.webm");
 
-    const res = await fetch("http://localhost:5000/api/analyze-speech", {
+    const res = await fetch("http://localhost:2001/api/speech/analyze-speech", {
       method: "POST",
       body: formData,
     })
     const data = await res.json();
-    setInfo({ id:"1", ...data });
+    console.log(data);
+    
+    setInfo({
+        id: "1",
+        transcript: data.results?.channels?.[0]?.alternatives?.[0]?.transcript || "No transcript",
+        confidence: data.results?.channels?.[0]?.alternatives?.[0]?.confidence || 0,
+        duration: data.metadata?.duration || 0,
+        words: data.results?.channels?.[0]?.alternatives?.[0]?.words || [],
+        raw: data, // store full for debug
+      });
     // console.log(await res.json());
   };
 
@@ -32,10 +42,11 @@ export default function Recorder() {
       >
         {isRecording ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
       </Button>
-
+      {isRecording&&<div>Listeninng</div>}
       {audioBlob && (
         <div className="flex flex-col items-center gap-4 w-full">
-          <audio controls src={URL.createObjectURL(audioBlob)} className="w-full rounded" />
+          {/* <audio controls src={URL.createObjectURL(audioBlob)} className="w-full rounded" /> */}
+          <WaveformPlayer audioUrl={URL.createObjectURL(audioBlob)}/>
           <Button onClick={handleUpload} className="flex items-center gap-2">
             <Upload className="w-4 h-4" />
             Analyze
