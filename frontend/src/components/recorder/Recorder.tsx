@@ -14,7 +14,7 @@ export default function Recorder() {
     const formData = new FormData();
     formData.append("file", audioBlob, "audio.webm");
 
-    const res = await fetch("http://192.168.xx.xx:2001/api/speech/analyze-speech", {
+    const res = await fetch("http://192.168.29.237:2001/api/speech/analyze-speech", {
       method: "POST",
       body: formData,
     })

@@ -17,6 +17,8 @@ const speechToText = async (req,res) => {
             mimetype: file.mimetype,
         }
         );
+        console.log(result);
+        
         if (error) return res.status(400).send({msg:"Response not given"});
         if (!error) res.json(result); 
     }catch (err) {

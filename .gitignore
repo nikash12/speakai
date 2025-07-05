@@ -6,6 +6,7 @@ frontend/dist/
 # Environment files
 frontend/.env
 backend/.env
+backend/db/.env
 
 # Logs
 *.log
