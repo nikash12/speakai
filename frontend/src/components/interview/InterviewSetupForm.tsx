@@ -1,7 +1,93 @@
-export default function InterviewSetupForm() {
+import {useForm} from 'react-hook-form'
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
+import { Label } from '@radix-ui/react-dropdown-menu';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { useState } from 'react';
 
+type Inputs={
+  title:string,
+  description:string,
+  resume?:File,
+  mode:string
+}
+export default function InterviewSetupForm() {
+  const {register,handleSubmit,watch,setValue} = useForm<Inputs>()
+  const selectedMode = watch("mode")
+  const [fileName, setFileName] = useState('');
   return (
     <>
+      <form onSubmit={handleSubmit((data:Inputs)=>console.log(data))} className='flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-3xl m-5 text-xl'>
+        <div className='flex md:w-1/2 w-full flex-col  p-3 ' >
+          <Label>Enter Job Title:</Label>
+          <Input type='text' {...register('title')}></Input>
+        </div>
+
+        <div className='flex md:w-1/2 md:flex-row flex-col p-3'>
+          <Label>Resume (optional): </Label>
+
+            <input
+              id="resume"
+              type="file"
+              accept=".pdf,.doc,.docx"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  setValue('resume', file);
+                  setFileName(file.name);
+                }
+              }}
+            />
+
+          <Button asChild variant="ghost" >
+            <label htmlFor="resume" className="cursor-pointer bg-blue-500 md:ml-5">
+              Upload
+            </label>
+          </Button>
+          {fileName && (
+            <span className="text-sm text-muted-foreground mt-1 truncate max-w-[200px]">{fileName}</span>
+          )}
+        </div>
+        <div className='flex md:w-1/2 w-full flex-col p-3'>
+          <Label>Description:</Label>
+          <Input type='text' {...register('description')}></Input>
+        </div>
+
+
+        <div className='flex md:w-1/2 w-full flex-col p-3'>
+          <Label>Mode:</Label>
+          <Select onValueChange={(val) => setValue("mode", val)} value={selectedMode}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select Mode" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Interview Mode</SelectLabel>
+                <SelectItem value="mock">mock</SelectItem>
+                <SelectItem value="Realtime">Realtime</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+
+
+
+        <div className="w-full flex  p-3">
+          <Button type="submit" className="w-fit px-6 text-base">
+            Submit
+          </Button>
+        </div>
+        
+      </form>
     </>
   );
 }
