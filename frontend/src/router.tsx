@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "./App"
+import Interview from "./components/interview/interview";
 
 
  const router = createBrowserRouter([
@@ -12,9 +13,14 @@ import App from "./App"
     ],
   },
   {
+    path:"/interview",
+    element:<Interview/>
+  },
+  {
     path: "*",
     element: null,
   },
+  
 ])
 
 export default router;

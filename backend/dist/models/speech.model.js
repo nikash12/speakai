@@ -1,12 +1,7 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const SpeechSchema = mongoose_1.default.Schema({
+import mongoose from 'mongoose';
+const SpeechSchema = mongoose.Schema({
     userId: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
@@ -21,5 +16,5 @@ const SpeechSchema = mongoose_1.default.Schema({
         type: Number,
     }
 }, { timestamps: true });
-const Speech = mongoose_1.default.model("Speech", SpeechSchema);
-exports.default = Speech;
+const Speech = mongoose.model("Speech", SpeechSchema);
+export default Speech;

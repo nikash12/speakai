@@ -4,7 +4,9 @@ dotenv.config()
 
 export default async function ConnectDB() {
     try{
-        const res = await mongoose.connect(process.env.DB_URL)
+        const url = process.env.DB_URL 
+        if(!url)throw new Error("URL to connect mongoDB not found")
+        const res = await mongoose.connect(url)
         if(!res){
             return;
         }

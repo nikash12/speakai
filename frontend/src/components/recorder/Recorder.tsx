@@ -33,15 +33,16 @@ export default function Recorder() {
   };
 
   return (
-    <div className="grid gap-6 p-6 rounded-xl shadow-md max-w-md mx-auto mt-10 place-items-center">
+    <div className="grid gap-6 p-6 rounded-xl shadow-md max-w-md mx-auto mt-10 place-items-center ">
       <Button
         variant={isRecording ? "destructive" : "default"}
         size="icon"
         onClick={isRecording ? stopRecording : startRecording}
-        className="w-16 h-16 rounded-full"
+        className="w-16 h-16 rounded-full "
       >
         {isRecording ? <MicOff className="w-6 h-6" /> : <Mic className="w-6 h-6" />}
       </Button>
+      
       {isRecording&&<div>Listeninng</div>}
       {audioBlob && (
         <div className="flex flex-col items-center gap-4 w-full">
