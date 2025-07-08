@@ -25,14 +25,14 @@ export default function InterviewSetupForm() {
   const [fileName, setFileName] = useState('');
   return (
     <>
-      <form onSubmit={handleSubmit((data:Inputs)=>console.log(data))} className='flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-3xl m-5 text-xl'>
-        <div className='flex md:w-1/2 w-full flex-col  p-3 ' >
-          <Label>Enter Job Title:</Label>
-          <Input type='text' {...register('title')}></Input>
+      <form onSubmit={handleSubmit((data:Inputs)=>console.log(data))} className=' dark:bg-white/8 md:w-1/2 flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-3xl m-5 text-xl'>
+        <div className='flex  w-full flex-col  p-3 ' >
+          <Label className='pb-2'>Enter Job Title:</Label>
+          <Input type='text' className='md:w-1/2' {...register('title')}></Input>
         </div>
 
-        <div className='flex md:w-1/2 md:flex-row flex-col p-3'>
-          <Label>Resume (optional): </Label>
+        <div className='flex  md:flex-row flex-col p-3'>
+          <Label className='pb-2'>Resume (optional): </Label>
 
             <input
               id="resume"
@@ -57,14 +57,14 @@ export default function InterviewSetupForm() {
             <span className="text-sm text-muted-foreground mt-1 truncate max-w-[200px]">{fileName}</span>
           )}
         </div>
-        <div className='flex md:w-1/2 w-full flex-col p-3'>
-          <Label>Description:</Label>
-          <Input type='text' {...register('description')}></Input>
+        <div className='flex w-full flex-col p-3 '>
+          <Label className='pb-2'>Description:</Label>
+          <Input type='text' {...register('description')} className='md:h-[20vh] md:w-3/4'></Input>
         </div>
 
 
         <div className='flex md:w-1/2 w-full flex-col p-3'>
-          <Label>Mode:</Label>
+          <Label className='pb-2'>Mode:</Label>
           <Select onValueChange={(val) => setValue("mode", val)} value={selectedMode}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Select Mode" />
