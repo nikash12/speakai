@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import App from "./App"
 import Interview from "./components/interview/Interview";
+import Live from "./components/live/live";
 
 
  const router = createBrowserRouter([
@@ -15,6 +16,10 @@ import Interview from "./components/interview/Interview";
   {
     path:"/interview",
     element:<Interview/>
+  },
+  {
+    path:"/live",
+    element:<Live/>
   },
   {
     path: "*",

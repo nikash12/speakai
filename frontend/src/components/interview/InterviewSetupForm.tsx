@@ -25,7 +25,7 @@ export default function InterviewSetupForm() {
   const [fileName, setFileName] = useState('');
   return (
     <>
-      <form onSubmit={handleSubmit((data:Inputs)=>console.log(data))} className=' dark:bg-white/8 md:w-1/2 flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-3xl m-5 text-xl'>
+      <form onSubmit={handleSubmit((data:Inputs)=>console.log(data))} style={{ fontFamily: "'Montserrat', sans-serif" }} className=' dark:bg-white/8 md:w-1/2 flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-2xl m-5 text-xl'>
         <div className='flex  w-full flex-col  p-3 ' >
           <Label className='pb-2'>Enter Job Title:</Label>
           <Input type='text' className='md:w-1/2' {...register('title')}></Input>
