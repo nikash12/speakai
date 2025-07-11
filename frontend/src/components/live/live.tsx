@@ -5,8 +5,10 @@ import {
 } from "@/components/ui/resizable"
 import Navbar from "../layout/navbar/Navbar"
 import QuestionSection from "./questionSection"
+import InputSection from "./inputSection"
 
 export default function Live() {
+  
   return (
     <main>
       <ResizablePanelGroup
@@ -23,18 +25,16 @@ export default function Live() {
 
         <ResizablePanel defaultSize={50}>
           <ResizablePanelGroup direction="vertical" className="h-full">
-            <ResizablePanel defaultSize={50} minSize={30} maxSize={60}>
-              <section className="m-10 bg-amber-200">
-                <QuestionSection />
-              </section>
+            <ResizablePanel defaultSize={40} minSize={30} maxSize={60}>
+              
+                <QuestionSection index={0}/>
+              
             </ResizablePanel>
 
             <ResizableHandle />
 
-            <ResizablePanel defaultSize={50}>
-              <section className="flex h-full items-center justify-center p-6 bg-red-400">
-                <h2 className="text-lg font-semibold">Three</h2>
-              </section>
+            <ResizablePanel >
+              <InputSection/>
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

@@ -12,6 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useState } from 'react';
+import generateQuestions from '@/utils/generateQuestions';
+import { useSetRecoilState } from 'recoil';
+import { questions } from '@/recoil';
 
 type Inputs={
   title:string,
@@ -23,9 +26,15 @@ export default function InterviewSetupForm() {
   const {register,handleSubmit,watch,setValue} = useForm<Inputs>()
   const selectedMode = watch("mode")
   const [fileName, setFileName] = useState('');
+  const setQuestion = useSetRecoilState(questions);
+  function submitFun(data:Inputs){
+    generateQuestions({data}).then((res)=>{
+      console.log(res);
+      setQuestion(res)});
+  }
   return (
     <>
-      <form onSubmit={handleSubmit((data:Inputs)=>console.log(data))} style={{ fontFamily: "'Montserrat', sans-serif" }} className=' dark:bg-white/8 md:w-1/2 flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-2xl m-5 text-xl'>
+      <form onSubmit={handleSubmit((data:Inputs)=>{submitFun(data)})} style={{ fontFamily: "'Montserrat', sans-serif" }} className=' dark:bg-white/8 md:w-1/2 flex h-1/2 flex-wrap flex-col justify-around p-5 md:text-2xl m-5 text-xl'>
         <div className='flex  w-full flex-col  p-3 ' >
           <Label className='pb-2'>Enter Job Title:</Label>
           <Input type='text' className='md:w-1/2' {...register('title')}></Input>

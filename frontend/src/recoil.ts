@@ -1,4 +1,5 @@
-import { atomFamily, selectorFamily } from "recoil";
+import { atom,atomFamily, selectorFamily } from "recoil";
+import type {AtomEffect} from 'recoil';
 
 export type Word = {
   word: string;
@@ -57,4 +58,21 @@ const audioStats = selectorFamily({
   },
 });
 
-export { audioSchema, audioStats };
+const localStorageEffect = (key: string):AtomEffect<any> => ({ setSelf, onSet }) => {
+  const savedValue = localStorage.getItem(key);
+  if (savedValue !== null) {
+    setSelf(JSON.parse(savedValue));
+  }
+
+  onSet((newValue) => {
+    localStorage.setItem(key, JSON.stringify(newValue));
+  });
+};
+
+
+const questions = atom({
+  key: "questionSchema",
+  default: [],
+  effects:[localStorageEffect('questions')]
+});
+export { audioSchema, audioStats,questions };
