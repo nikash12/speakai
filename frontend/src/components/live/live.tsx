@@ -3,12 +3,14 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import Navbar from "../layout/navbar/Navbar"
 import QuestionSection from "./questionSection"
 import InputSection from "./inputSection"
+import { useRecoilState } from "recoil"
+import { indexSchema } from "@/recoil"
+import InfoSection from "./infoSection"
 
 export default function Live() {
-  
+  const [currIndex,setCurrIndex] = useRecoilState(indexSchema)
   return (
     <main>
       <ResizablePanelGroup
@@ -16,9 +18,7 @@ export default function Live() {
         className="rounded-lg border md:min-w-[100vw] min-h-[100vh]"
       >
         <ResizablePanel defaultSize={20} minSize={20} maxSize={40}>
-          <aside className="flex h-full bg-amber-200 items-center justify-center p-6">
-            <h2 className="text-lg font-semibold">One</h2>
-          </aside>
+          <InfoSection/>
         </ResizablePanel>
 
         <ResizableHandle />
@@ -27,14 +27,14 @@ export default function Live() {
           <ResizablePanelGroup direction="vertical" className="h-full">
             <ResizablePanel defaultSize={40} minSize={30} maxSize={60}>
               
-                <QuestionSection index={0}/>
+                <QuestionSection />
               
             </ResizablePanel>
 
             <ResizableHandle />
 
             <ResizablePanel >
-              <InputSection/>
+              <InputSection />
             </ResizablePanel>
           </ResizablePanelGroup>
         </ResizablePanel>

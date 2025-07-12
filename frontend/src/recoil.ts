@@ -1,5 +1,5 @@
 import { atom,atomFamily, selectorFamily } from "recoil";
-import type {AtomEffect} from 'recoil';
+import localStorageEffect from "./utils/localStorageEffect";
 
 export type Word = {
   word: string;
@@ -7,6 +7,7 @@ export type Word = {
   end: number;
   confidence: number;
 };
+
 const audioSchema = atomFamily({
   key: "audioSchema",
   default: (id) => ({
@@ -17,12 +18,18 @@ const audioSchema = atomFamily({
     words: [] as Word[],
     raw: null,
   }),
+  effects_UNSTABLE: (id: string) => [localStorageEffect(`answer-${id}`)],
 });
 
+const indexSchema = atom({
+  key:"index",
+  default:0,
+  effects:[localStorageEffect("index")]
+})
 
 const audioStats = selectorFamily({
   key: "audioStats",
-  get: (id) => ({ get }) => {
+  get: (id:string) => ({ get }) => {
     const audio = get(audioSchema(id));
     const { transcript, duration } = audio;
 
@@ -58,21 +65,17 @@ const audioStats = selectorFamily({
   },
 });
 
-const localStorageEffect = (key: string):AtomEffect<any> => ({ setSelf, onSet }) => {
-  const savedValue = localStorage.getItem(key);
-  if (savedValue !== null) {
-    setSelf(JSON.parse(savedValue));
-  }
-
-  onSet((newValue) => {
-    localStorage.setItem(key, JSON.stringify(newValue));
-  });
-};
-
 
 const questions = atom({
   key: "questionSchema",
   default: [],
   effects:[localStorageEffect('questions')]
 });
-export { audioSchema, audioStats,questions };
+
+
+
+
+
+
+
+export { audioSchema, audioStats,questions,indexSchema };
