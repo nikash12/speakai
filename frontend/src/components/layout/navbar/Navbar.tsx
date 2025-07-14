@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="border-b bg-background p-1">
+    <header className="border-b bg-background p-1 ">
       <div className="flex items-center justify-between px-4 py-3 md:px-6">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           SpeakAI

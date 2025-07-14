@@ -5,12 +5,12 @@ import {
 } from "@/components/ui/resizable"
 import QuestionSection from "./questionSection"
 import InputSection from "./inputSection"
-import { useRecoilState } from "recoil"
-import { indexSchema } from "@/recoil"
+// import { useRecoilState } from "recoil"
+// import { indexSchema } from "@/recoil"
 import InfoSection from "./infoSection"
 
 export default function Live() {
-  const [currIndex,setCurrIndex] = useRecoilState(indexSchema)
+  // const [currIndex,setCurrIndex] = useRecoilState(indexSchema)
   return (
     <main>
       <ResizablePanelGroup

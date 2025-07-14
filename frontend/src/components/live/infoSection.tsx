@@ -1,4 +1,4 @@
-import CameraUtil from "@/utils/cameraUtil";
+// import CameraUtil from "@/utils/cameraUtil";
 import InterviewInfo from "./interviewInfo";
 
 export default function InfoSection(){

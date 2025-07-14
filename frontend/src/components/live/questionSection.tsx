@@ -1,8 +1,8 @@
 import {Card,CardContent} from '@/components/ui/card'
-import Timer from './Timer'
+// import Timer from './Timer'
 import {  useRecoilValue } from 'recoil'
 import { indexSchema, questions } from '@/recoil'
-import { Button } from '../ui/button'
+// import { Button } from '../ui/button'
 
 
 

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { audioSchema, indexSchema } from "@/recoil.ts";
-import { Mic, MicOff, Upload } from "lucide-react";
+import { Mic, MicOff } from "lucide-react";
 import {  useRecoilState } from "recoil";
 import { useAudioRecorder } from "@/hooks/useAudioRecorder.tsx";
 import { useEffect, useState } from "react";
