@@ -42,7 +42,6 @@ export default function RecorderUtil() {
   function handleRespond(){
     if(!info)return
     setIndex(index+1)
-    setInfo(null)
     setAudioBlob(null)
     setTranscriptStatus(false)
     //...

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import App from "./App"
 import Interview from "./components/interview/Interview";
 import Live from "./components/live/live";
+import GenerateReport from "./components/report/Report";
 
 
  const router = createBrowserRouter([
@@ -20,6 +21,10 @@ import Live from "./components/live/live";
   {
     path:"/live",
     element:<Live/>
+  },
+  {
+    path:"/report",
+    element:<GenerateReport/>
   },
   {
     path: "*",

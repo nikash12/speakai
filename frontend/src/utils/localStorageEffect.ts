@@ -2,8 +2,14 @@ import type { AtomEffect } from "recoil";
 
 const localStorageEffect = (key: string): AtomEffect<any> => ({ setSelf, onSet }) => {
   const savedValue = localStorage.getItem(key);
+
   if (savedValue !== null) {
-    setSelf(JSON.parse(savedValue));
+    try {
+      setSelf(JSON.parse(savedValue));
+    } catch (err) {
+      console.warn(`localStorage "${key}" has invalid JSON. Clearing...`, err);
+      localStorage.removeItem(key); // Optional: clear bad data
+    }
   }
 
   onSet((newValue) => {

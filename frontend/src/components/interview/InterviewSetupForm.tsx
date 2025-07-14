@@ -14,7 +14,8 @@ import {
 import { useState } from 'react';
 import generateQuestions from '@/utils/generateQuestions';
 import { useSetRecoilState } from 'recoil';
-import { questions } from '@/recoil';
+import { indexSchema, questions } from '@/recoil';
+import { useNavigate } from 'react-router-dom';
 
 type Inputs={
   title:string,
@@ -23,14 +24,18 @@ type Inputs={
   mode:string
 }
 export default function InterviewSetupForm() {
+  const navigate = useNavigate()
   const {register,handleSubmit,watch,setValue} = useForm<Inputs>()
   const selectedMode = watch("mode")
   const [fileName, setFileName] = useState('');
   const setQuestion = useSetRecoilState(questions);
+  const setIndex = useSetRecoilState(indexSchema)
   function submitFun(data:Inputs){
     generateQuestions({data}).then((res)=>{
       console.log(res);
       setQuestion(res)});
+      setIndex(0);
+      navigate("/live")
   }
   return (
     <>
