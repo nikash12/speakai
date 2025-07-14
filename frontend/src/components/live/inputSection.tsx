@@ -1,7 +1,7 @@
 import RecorderUtil from "@/utils/recorderUtil";
 import { Button } from "../ui/button";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { indexSchema, questions } from "@/recoil";
+import { useRecoilState, } from "recoil";
+import { indexSchema, } from "@/recoil";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { useState } from "react";
