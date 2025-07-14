@@ -23,7 +23,7 @@ export default function WordFrequencyLineChart() {
     // Count how many words occur in each second (rounded)
     const freqMap: Record<number, number> = {};
 
-    words.forEach(({ start }) => {
+    words.forEach(({ start }:{start:number}) => {
       const second = Math.floor(start); // round to nearest second
       freqMap[second] = (freqMap[second] || 0) + 1;
     });

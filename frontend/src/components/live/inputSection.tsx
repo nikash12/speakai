@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 export default function InputSection(){
     const [index,setIndex] = useRecoilState(indexSchema)
     const [showEndButton,setShowEndButton] = useState(false)
-    const setQuestion = useSetRecoilState(questions)
     const navigate = useNavigate()
     function handleEnd(){
         setIndex(0);
