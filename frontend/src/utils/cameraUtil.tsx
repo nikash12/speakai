@@ -26,14 +26,14 @@ export default function CameraUtil() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 w-full">
       {/* 👀 Live Preview */}
       <video
         ref={previewRef}
         autoPlay
         muted
         playsInline
-        className="w-[320px] h-[240px] rounded-md border"
+        className="w-[80%] h-[240px] rounded-md border"
       />
 
       {/* 🎥 Actual Recording */}

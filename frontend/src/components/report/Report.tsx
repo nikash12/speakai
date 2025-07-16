@@ -24,6 +24,7 @@ export default function GenerateReport() {
   async function handleGenerateReport() {
     const qnaList = questionList.map((q: QuestionType, idx: number) => {
       const raw = localStorage.getItem(`answer-${idx}`);
+      localStorage.removeItem(`answer-${idx}`)
       let ans = null;
 
       try {

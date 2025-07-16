@@ -31,11 +31,14 @@ export default function InterviewSetupForm() {
   const setQuestion = useSetRecoilState(questions);
   const setIndex = useSetRecoilState(indexSchema)
   function submitFun(data:Inputs){
+    localStorage.setItem("title",data.title);
+    localStorage.setItem("mode",data.mode);
     generateQuestions({data}).then((res)=>{
       console.log(res);
-      setQuestion(res)});
-      setIndex(0);
-      navigate("/live")
+      setQuestion(res)}
+    );
+    setIndex(0);
+    navigate("/live")
   }
   return (
     <>
@@ -63,7 +66,7 @@ export default function InterviewSetupForm() {
             />
 
           <Button asChild variant="ghost" >
-            <label htmlFor="resume" className="cursor-pointer bg-blue-500 md:ml-5">
+            <label htmlFor="resume" className="cursor-pointer bg-violet-600 md:ml-5">
               Upload
             </label>
           </Button>
