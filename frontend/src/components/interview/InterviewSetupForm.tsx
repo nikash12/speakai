@@ -33,12 +33,20 @@ export default function InterviewSetupForm() {
   function submitFun(data:Inputs){
     localStorage.setItem("title",data.title);
     localStorage.setItem("mode",data.mode);
+    localStorage.setItem("description",data.description)
+    setIndex(0);
+    if (data.mode === 'realtime'){
+      navigate("/dynamic") 
+      return
+    }
     generateQuestions({data}).then((res)=>{
       console.log(res);
       setQuestion(res)}
     );
-    setIndex(0);
-    navigate("/live")
+    console.log(data.mode);
+    
+    navigate("/live");
+
   }
   return (
     <>
@@ -90,7 +98,7 @@ export default function InterviewSetupForm() {
               <SelectGroup>
                 <SelectLabel>Interview Mode</SelectLabel>
                 <SelectItem value="mock">mock</SelectItem>
-                <SelectItem value="Realtime">Realtime</SelectItem>
+                <SelectItem value="realtime">Realtime</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>

@@ -1,21 +1,14 @@
 import { Router } from "express";
-import { userAll, userLogin, userRegister, userUpdate } from "../controllers/user.controller.js";
-import {userMiddleware,userUpdateMiddleware} from '../middleware/user.middleware.js'
+import { userAll, userLogin, userRegister } from "../controllers/user.controller.js";
 const route = Router()
 
-route.route('/Register').post(
-    userMiddleware,
+route.route('/register').post(
     userRegister
 )
-route.route('/Update').post(
-    userUpdateMiddleware,
-    userUpdate
-)
-route.route('/Login').post(
-    userMiddleware,
+route.route('/login').post(
     userLogin
 )
-route.route('/All').get(
+route.route('/all').get(
     userAll
 )
 

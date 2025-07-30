@@ -45,7 +45,7 @@ export default function CameraUtil() {
           <div className="flex flex-col items-center gap-2">
             <p className="text-sm text-gray-500">Status: {status}</p>
 
-            <div className="flex gap-2">
+            {/* <div className="flex gap-2">
               <button
                 onClick={startRecording}
                 className="bg-green-500 px-4 py-2 rounded text-white"
@@ -58,7 +58,7 @@ export default function CameraUtil() {
               >
                 Stop Recording
               </button>
-            </div>
+            </div> */}
 
             {mediaBlobUrl && (
               <video

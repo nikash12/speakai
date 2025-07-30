@@ -74,6 +74,18 @@ const questions = atom({
 
 
 
+export type ChatMessage = {
+  id: number;
+  question: string;
+  answer: string;
+  timestamp?: number;
+};
+
+export const chatHistoryAtom = atom<ChatMessage[]>({
+  key: "chatHistoryAtom",
+  default: [],
+  effects: [localStorageEffect("chatHistory")],
+});
 
 
 

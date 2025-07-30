@@ -3,6 +3,10 @@ import App from "./App"
 import Interview from "./components/interview/Interview";
 import Live from "./components/live/live";
 import GenerateReport from "./components/report/Report";
+import Dynamic from "./components/dynamic/dynamic";
+import { GameMain } from "./components/gamification/GameMain";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
 
 
  const router = createBrowserRouter([
@@ -15,6 +19,14 @@ import GenerateReport from "./components/report/Report";
     ],
   },
   {
+    path:"/login",
+    element:<Login/>
+  },
+  {
+    path:"/signup",
+    element:<Signup/>
+  },
+  {
     path:"/interview",
     element:<Interview/>
   },
@@ -25,6 +37,14 @@ import GenerateReport from "./components/report/Report";
   {
     path:"/report",
     element:<GenerateReport/>
+  },
+  {
+    path:"/dynamic",
+    element:<Dynamic/>
+  },
+  {
+    path:"/game/modes",
+    element:<GameMain/>
   },
   {
     path: "*",
