@@ -4,6 +4,7 @@ import Navbar from "./components/layout/navbar/Navbar"
 // import WordFrequencyLineChart from "./components/charts/lineChart"
 import UnderBuild from "./components/interview/underBuild"
 import Hero from "./components/home/Hero"
+import VideoFeedbackDashboard from "./components/report/main"
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
       <Hero />
 
       <UnderBuild/>
+      
     </>
   )
 }

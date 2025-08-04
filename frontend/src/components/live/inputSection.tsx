@@ -16,12 +16,6 @@ export default function InputSection(){
     function handleEnd(){
         setIndex(0);
         setShowEndButton(false)
-        Object.keys(localStorage).forEach(key => {
-            if (key.startsWith("answer-")) {
-                localStorage.removeItem(key);
-            }
-        });
-        setQuestion([])
         navigate("/report")
     }
     

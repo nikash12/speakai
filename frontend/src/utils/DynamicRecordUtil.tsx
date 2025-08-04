@@ -16,7 +16,7 @@ export default function DynamicRecorderUtil({ onRespond }: { onRespond: (answer:
 
     const formData = new FormData();
     formData.append("file", audioBlob, "audio.webm");
-    const url = 'https://0eb835b8abf8.ngrok-free.app'
+    const url = 'https://9eb2d824b37d.ngrok-free.app '
     const res = await fetch(`${url}/api/speech/analyze-speech`, {
       method: "POST",
       body: formData,

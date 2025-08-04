@@ -1,4 +1,4 @@
-import img from '../../../public/interviewer.jpg'
+
 
 
 export default function InterviewrProfile(){
@@ -7,7 +7,7 @@ export default function InterviewrProfile(){
     return(
         <div className="flex flex-col justify-center h-[40vh] items-center">
             <div className="bg-amber-300 w">
-                <img src={img}></img>
+                <img src='./interviewer.jpg'></img>
             </div>
             <h2 className="m-1"><span className="font-bold">Job Title:</span>{title}</h2>
             <h2 className="m1"><span className="font-bold">Interview Mode:</span>{mode}</h2>

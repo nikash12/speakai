@@ -112,6 +112,107 @@ ${prompt}
   }
 };
 
+// In your controller file (e.g., interviewController.js)
+
+const generateFullReport = async (req, res) => {
+  console.log("Received Full Report request:", req.body);
+
+  // Destructure the stringified JSON from the request body
+  const { prompt, words } = req.body;
+
+  if (!prompt || !words) {
+    return res.status(400).json({ error: 'Missing prompt or words data' });
+  }
+
+  try {
+    // 1. Parse the stringified JSON back into objects
+    const qnaList = JSON.parse(prompt);
+    const wordsData = JSON.parse(words);
+
+    // 2. Combine the parsed data into a single, rich data structure
+    const combinedData = qnaList.map((qnaItem, index) => {
+      // Find the corresponding words data for the current question
+      const correspondingWords = wordsData.find(w => w.questionIndex === index);
+      return {
+        question: qnaItem.question,
+        transcript: correspondingWords?.transcript || qnaItem.userAnswer,
+        duration: correspondingWords?.duration || 0,
+        words: correspondingWords?.words || [],
+      };
+    });
+
+    // 3. Dynamically build the input string for the AI from the combined data
+    const inputDataString = combinedData.map((item, index) => `
+--- Answer ${index + 1} ---
+**Question:**
+${item.question}
+
+**User's Answer Transcript:**
+${item.transcript}
+
+**Speech-to-Text (STT) JSON for this answer:**
+${JSON.stringify({ duration: item.duration, words: item.words }, null, 2)}
+`).join('\n\n');
+
+    // 4. Use the final prompt to ask for a holistic JSON report
+    const text = `You are an expert AI Interview Coach. Your task is to analyze a user's complete set of interview answers and generate a single, detailed, holistic feedback report in JSON format.
+
+You will be given a list of interview questions, the user's answer transcripts, and the detailed speech-to-text (STT) data for each answer.
+
+**YOUR TASK:**
+Based on ALL the provided data, generate a single JSON object that summarizes the entire performance. The JSON should have a structure similar to the example below. Analyze recurring strengths, consistent weaknesses, and provide overall scores and recommendations.
+
+**INPUT DATA:**
+${inputDataString}
+
+**EXAMPLE JSON OUTPUT STRUCTURE:**
+{
+  "report": {
+    "video": {
+      "title": "Holistic Interview Analysis",
+      "level": "Overall Performance Review",
+      "achievement": "SILVER",
+      "rating": "GOOD",
+      "description": "A summary of recurring strengths and weaknesses.",
+      "actionPlan": "A primary action to focus on."
+    },
+    "metrics": {
+      "answerRelevance": { "status": "Mostly Relevant", "description": "..." },
+      "paceOfSpeech": { "score": 155, "average": 160, "description": "Your pace was generally good but varied." },
+      "umCounter": { "count": 2.5, "average": 3, "description": "...", "percentage": 70 },
+      "vocabulary": { "level": "Smart Accessible", "average": "Smart Accessible", "sophisticated": 30, "smartAccessible": 60, "simple": 10 },
+      "powerWord": { "count": 15, "average": 12, "description": "..." },
+      "fillerWords": { "count": 3, "average": 4, "description": "...", "percentage": 65 }
+    }
+  }
+}
+`;
+
+    // 5. Generate content and send the response
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    const result = await model.generateContent(text);
+    const response = await result.response;
+    const textOutput = response.text();
+
+    const cleanText = textOutput
+      .replace(/^```json/, '')
+      .replace(/^```/, '')
+      .replace(/```$/, '')
+      .trim();
+
+    const report = JSON.parse(cleanText);
+    res.json(report); // Send the parsed report back
+
+  } catch (error) {
+    console.error('❌ Error generating report:', error);
+    // Check for parsing errors specifically
+    if (error instanceof SyntaxError) {
+        return res.status(400).json({ error: 'Invalid JSON format in prompt or words data.' });
+    }
+    res.status(500).json({ error: 'Failed to generate report' });
+  }
+};
+
 const generateGameQuestions = async (req, res) => {
     console.log("Received SpeakAI request:", req.body);
 
@@ -257,4 +358,4 @@ Output JSON format:
 };
 
 
-export {generateQuestions,generateReport,dynamicChatHandler,generateGameQuestions}
+export {generateQuestions,generateReport,generateFullReport,dynamicChatHandler,generateGameQuestions}

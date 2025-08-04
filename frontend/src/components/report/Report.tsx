@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { questions } from '@/recoil';
+import VideoFeedbackDashboard from './main';
 
 type QuestionType = {
   question: string;
@@ -69,6 +70,8 @@ export default function GenerateReport() {
 
   return (
     <div className="max-w-4xl mx-auto mt-10 px-4">
+      <VideoFeedbackDashboard/>
+
       <Button onClick={handleGenerateReport} disabled={loading}>
         {loading ? 'Generating Report...' : 'Generate Interview Report'}
       </Button>

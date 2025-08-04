@@ -15,7 +15,7 @@ export default function RecorderUtil() {
 
     const formData = new FormData();
     formData.append("file", audioBlob, "audio.webm");
-    const url = 'https://0eb835b8abf8.ngrok-free.app'
+    const url = 'https://740cb959338b.ngrok-free.app'
     const res = await fetch(`${url}/api/speech/analyze-speech`, {
       method: "POST",
       body: formData,

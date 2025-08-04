@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { generateQuestions, generateReport,dynamicChatHandler, generateGameQuestions } from "../controllers/interviewApi.controller.js";
+import { generateQuestions, generateReport,dynamicChatHandler, generateGameQuestions, generateFullReport } from "../controllers/interviewApi.controller.js";
 import { endSession } from "../controllers/session.controller.js";
 
 const interviewRoute = Router()
@@ -10,6 +10,10 @@ interviewRoute.route('/questions').post(
 
 interviewRoute.route('/generateReport').post(
     generateReport
+)
+
+interviewRoute.route('/generateFullReport').post(
+    generateFullReport
 )
 
 interviewRoute.route('/dynamic/questions').post(
