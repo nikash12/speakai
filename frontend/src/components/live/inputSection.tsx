@@ -22,7 +22,7 @@ export default function InputSection(){
 
     
     return(
-        <div className="flex flex-col">
+        <div className="flex flex-col overflow-auto">
             <RecorderUtil />
             
             <div className="flex justify-center gap-4 mt-6">

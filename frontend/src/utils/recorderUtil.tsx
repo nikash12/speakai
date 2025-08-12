@@ -15,12 +15,17 @@ export default function RecorderUtil() {
 
     const formData = new FormData();
     formData.append("file", audioBlob, "audio.webm");
-    const url = 'https://740cb959338b.ngrok-free.app'
-    const res = await fetch(`${url}/api/speech/analyze-speech`, {
+    // const url = 'https://f11120095647.ngrok-free.app'
+    // const res = await fetch(`${url}/api/speech/analyze-speech`, {
+    //   method: "POST",
+    //   body: formData,
+    // })
+    const res = await fetch(`https://deepgram.g-nikash13579.workers.dev/speech-to-text`, {
       method: "POST",
       body: formData,
     })
-    
+
+    http://127.0.0.1:8787/
     setTranscriptStatus(true);
     const data = await res.json();
     console.log(info);
@@ -66,7 +71,7 @@ export default function RecorderUtil() {
       </Button>
       
       {isRecording&&<div>Listeninng</div>}
-      <h1>{info.transcript}</h1>
+      <h1 className="h-[20vh] overflow-auto">{info.transcript}</h1>
       {transcriptStatus&&<Button onClick={handleRespond}>Respond</Button>}
     </div>
   );
